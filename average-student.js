@@ -9,7 +9,7 @@ document.getElementById('average').innerHTML = '';
 function insertStudent() {
     let student = prompt('Enter the student name:');
     if (student != null) {
-        if (!isNaN(student)) {
+        if (!isNaN(student)) { // validate if is not a string
             alert('Please insert a valid name...')
         } else {
             document.getElementById('nameStudent').innerHTML = student.toLocaleUpperCase();
@@ -19,26 +19,27 @@ function insertStudent() {
 
 // enter the grades
 function insertGrades() {
+    const maxGrades = 3; // total of grades to insert
     // firts validate the student name
     let nameInput = document.getElementById('nameStudent');
     if (nameInput.textContent == '') {
         alert('Insert the student name');
     } else {
         // add the 3 grades
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= maxGrades; i++) {
             let grade = prompt('Enter the grade' + i + ':');
             if (grade == '') {
                 alert('Please insert the grade...');
                 clean();
                 return;
             } else {
-                if (isNaN(grade)) {
+                if (isNaN(grade)) {// validate if is not a number
                     alert('Please insert a valid grade...');
                     clean();
                     return;
                 }
                 if (grade >= 0 && grade <= 10) {
-                    document.getElementById('grade' + i).innerHTML = Number(grade).toFixed(2);
+                    document.getElementById('grade' + i).innerHTML = Number(grade).toFixed(2); // validate the decimal to show
                 } else {
                     alert('Please insert grades between 0 and 10');
                     clean();
@@ -50,8 +51,8 @@ function insertGrades() {
         let grade1 = document.getElementById('grade1');
         let grade2 = document.getElementById('grade2');
         let grade3 = document.getElementById('grade3');
-        if (grade1.textContent != '' && grade2.textContent != '' && grade3.textContent != '') {
-            let average = (Number(grade1.textContent) + Number(grade2.textContent) + Number(grade3.textContent)) / 3;
+        if (grade1.textContent != '' && grade2.textContent != '' && grade3.textContent != '') { // validate if exist all the grades
+            let average = (Number(grade1.textContent) + Number(grade2.textContent) + Number(grade3.textContent)) / maxGrades;
             let message = '';
             if (average >= 7) {
                 message = nameInput.textContent.toLocaleUpperCase() +
